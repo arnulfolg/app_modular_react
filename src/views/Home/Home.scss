@@ -1,0 +1,10 @@
+section.gallery {
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-auto-flow: row;
+	grid-gap: 1rem;
+
+	.gallery_item img {
+		width: 100%;
+	}
+}

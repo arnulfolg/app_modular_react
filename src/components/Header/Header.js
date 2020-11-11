@@ -14,12 +14,15 @@ class Header extends React.Component {
   render() {
 
     return (
-      <div>
+      <header>
 		  <nav>
 			  <ul>
 				  <li>
-					  <Link to="/">Home</Link>
+					<Link to="/">
+						<img src="./assets/logo.png" alt="Mi Dulce Hogar"/>
+					</Link>
 				  </li>
+				  <span className="separator"/>
 				  <li>
 					  <Link to="/login">Login</Link>
 				  </li>
@@ -29,9 +32,12 @@ class Header extends React.Component {
 				  <li>
 					  <Link to="/profile">Profile</Link>
 				  </li>
+				  <li>
+					  <button className="btn_transparent">Cerrar sesión</button>
+				  </li>
 			  </ul>
 		  </nav>
-      </div>
+      </header>
     );
   }
 }

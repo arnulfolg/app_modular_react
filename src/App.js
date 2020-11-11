@@ -8,6 +8,8 @@ import Login from "./views/Login/Login"
 import Profile from './views/Profile/Profile';
 import Register from './views/Register/Register';
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Home from './views/Home/Home';
 
 const history = createBrowserHistory();
 history.listen(location => {
@@ -17,20 +19,23 @@ history.listen(location => {
 } )
 
 class App extends React.Component {
-  state = { height: window.innerHeight };
 
   render() {
     
     return (
       <Router history={history}>
         <Header />
-        <Switch>
-          <HttpsRedirect>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/profile" component={Profile} />
-            <Route exact path="/register" component={Register} />
-          </HttpsRedirect>
-        </Switch>
+        <section className="main">
+          <Switch>
+            <HttpsRedirect>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/profile" component={Profile} />
+              <Route exact path="/register" component={Register} />
+            </HttpsRedirect>
+          </Switch>
+        </section>
+        <Footer />
       </Router>
     );
   }

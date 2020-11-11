@@ -91,15 +91,8 @@ class Login extends React.Component {
     this.setState({ showPasswordModal: !this.state.showPasswordModal, showIsClientModal: true })
   }
 
- 
-
-
-
-
   render() {
-    const { email, password } = this.state;
     let logo_img = ''
-    let mt = "0"
     let topbuttonClient = "2rem"
     
     if (isPlatform('android')) {
@@ -107,92 +100,52 @@ class Login extends React.Component {
     }
 
     return (
-      <div className="mdh-login-view -main flex flex-wrap">
-        <div className="mdh-login-view-form flex-1">
-          <section
-            className="flex flex-direction-column flex-content-center"
-            style={{ maxWidth: "20rem", margin: "0 auto", marginTop: this.state.InputProps.mtInput }}>
-            <div style={{ visibility: this.state.InputProps.visibility }}>
-              <div className="flex flex-justify-center">
-                <img alt="Mi Dulce Hogar" src={logo_img} style={{ width: 100, height: 100, marginTop: mt }} />
-              </div>
+      <section className="grid-cols">
+            <section className="banner grid-cols--item-2-4">
+              {/* <div className="flex flex-justify-center">
+                <img alt="Mi Dulce Hogar" src={logo_img} />
+              </div> */}
+                <h2>Inicia sesion</h2>
+                <div className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</div>
+            </section>
 
-              <div className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</div>
-            </div>
+            <form autoComplete="off" className="form grid-cols--item-2-4" >
 
-            <form autoComplete="off" style={{ marginTop: topbuttonClient }} >
+                <section className="form_input">
+                    <label htmlFor="email">Correo</label>
+                    <input 
+                        placeholder="Ingresa tu correo" 
+                        id="email" 
+                        type="email"
+                    />
+                </section>
 
+              <section className="form_input">
+                  <label htmlFor="password">Contraseña</label>
+                  <input
+                      placeholder="Contraseña" id="password" type="password"
+                  />
+              </section>
 
-
-              <input
-                placeholder="Email"
-              />
-              <br />
-              <input
-                placeholder="Password"
-              />
-              <br />
-              <button
-                style={{ marginTop: topbuttonClient }}
-                className="-full-width"
-               // onClick={this.loginApple.bind(this)}
-               >
-                Entrar
-              </button>
-              {/* <Button
-                style={{ marginTop: topbuttonClient }}
-                className="-full-width" onClick={this.appleLogin.bind(this)}>
-                Apple Login
-              </Button>
-              */}
-              <br />
-              {/*
-              <Button
-                className="-full-width -white"
-                onClick={() => {
-                  document.location = "/registro";
-                }}>
-                <img src="/assets/login-google.svg" className="svg-icon" />
-                <div style={{ display: "inline-block", width: "13rem" }}>Login with Google</div>
-              </Button>
-              */}
-
-              <br />
-              <br />
-
-              {/* <Button className="-full-width -white" onClick={this.onLoginFacebook.bind(this)} disabled={true}>
-                <img src="/assets/login-facebook.svg" className="svg-icon" />
-                <div style={{ display: "inline-block", width: "13rem" }}>Login Facebook Prox</div>
-              </Button>*/}
+              <section className="form_input">
+                  <button
+                    className="btn_primary"
+                    >
+                    Entrar
+                  </button>
+              </section>
             </form>
 
-            <br />
-            <div>
-              <button
-                className="-white"
-                style={{ width: "40%", fontSize: "smaller" }}
-                onClick={() => {
-                  this.props.history.push(`/registro?${this.state.stringified}`);
-                }} disabled={false}>
-                ¡Registrarme!
-                </button>
-
-              <button
-                className="-white"
-                style={{ width: "55%", fontSize: "90%" , marginLeft:"1rem"}}
-                onClick={this.isClient.bind(this)}
-              //disabled={false}
-              >
-                Ingresar por SMS
-              </button>
-
-            </div>
+            <section className="register grid-cols--item-2-4">
+                <section className="form_input">
+                    <button>
+                        ¡Registrarme!
+                    </button>
+                </section>
+            </section>
            
-          </section>
-        </div>
+      </section>
 
-        <div className="mdh-login-view-image flex-1" />
-      </div>
     );
   }
 }

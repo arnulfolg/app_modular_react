@@ -1,4 +1,46 @@
-nav {
-	background-color: darkblue;
+header {
+	background-color: var(--blue-primary);
 	color: white;
+
+	a {
+		color: white;
+	}
+
+	a img {
+		height: 5.4rem;
+	}
+
+	nav {
+		height: 80px;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: flex-start;
+		align-content: stretch;
+		align-items: stretch;
+
+		ul {
+			order: 0;
+			flex: 1 1 auto;
+			align-self: auto;
+			display: flex;
+
+			flex-direction: row;
+			flex-wrap: nowrap;
+			justify-content: space-around;
+			align-content: stretch;
+			align-items: center;
+
+			li {
+				margin: 0 0.5rem;
+			}
+
+			.separator {
+				order: 0;
+				flex: 1 1 auto;
+				align-self: auto;
+			}
+		}
+		
+	}
 }
