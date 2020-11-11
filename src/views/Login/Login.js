@@ -1,4 +1,5 @@
 import React from "react";
+import './Login.scss';
 import { isPlatform } from '@ionic/react'
 import _ from "lodash";
 

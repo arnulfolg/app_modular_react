@@ -1,9 +1,13 @@
 import React from 'react';
-import Login from "./views/Login"
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HttpsRedirect from 'react-https-redirect';
 import ReactGA from 'react-ga';
 import { createBrowserHistory } from "history";
+
+import Login from "./views/Login/Login"
+import Profile from './views/Profile/Profile';
+import Register from './views/Register/Register';
+import Header from "./components/Header/Header";
 
 const history = createBrowserHistory();
 history.listen(location => {
@@ -17,17 +21,16 @@ class App extends React.Component {
 
   render() {
     
-    const {height} = this.state;
     return (
       <Router history={history}>
-        <style>{`
-          :root {
-            --window-height: ${height}px;
-          }
-        `}</style>
-        <HttpsRedirect>
-          <Route exact path="/login" component={Login} />
-        </HttpsRedirect>
+        <Header />
+        <Switch>
+          <HttpsRedirect>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/register" component={Register} />
+          </HttpsRedirect>
+        </Switch>
       </Router>
     );
   }
