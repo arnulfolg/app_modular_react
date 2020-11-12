@@ -2,10 +2,7 @@ import React from "react";
 import './Home.scss';
 // import { isPlatform } from '@ionic/react'
 
-
-
 class Home extends React.Component {
-
 
   render() {
 

@@ -1,15 +1,37 @@
 import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import './Register.scss';
-// import { isPlatform } from '@ionic/react'
 
 
-class Register extends React.Component {
+function Register () {
 
-  componentDidMount() {
-        
+  const validationSchema = Yup.object({
+    name: Yup.string().max(20, 'Tu nombre debe ser menor a 20 caracteres').required('Escribe tu nombre'),
+    last_name: Yup.string().max(100),
+    email: Yup.string().email().required('Must be email'),
+    password: Yup.string().min(4).max(20).required('Must be at least 4 characters'),
+    password_confirmation: Yup.string().min(4).max(20).oneOf([Yup.ref('password'), null], 'Passwords must match').required('Confirma tu contraseña')
+  })
+
+  const initialValues = {
+        name: "",
+        last_name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+        password_valid: false
   }
 
-  render() {
+  const onSubmit = values => {
+    console.log(values)
+  }
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
 
 
     return (
@@ -23,23 +45,31 @@ class Register extends React.Component {
               <p className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</p>
             </section>
 
-            <form autoComplete="off" className="form grid-cols--item-short" >
+            <form onSubmit={formik.handleSubmit} autoComplete="off" className="form grid-cols--item-short" >
 
                 <section className="form_input">
-                    <label htmlFor="nombre">Nombre</label>
+                    <label htmlFor="name">Nombre</label>
                     <input 
                         placeholder="Ingresa tu mombre" 
-                        id="nombre" 
+                        id="name" 
+                        name="name" 
                         type="text"
+                        max="20"
+                        required
+                        {...formik.getFieldProps('name')}
                     />
+                    { formik.touched.name && formik.errors.name ? 
+                    <span> {formik.errors.name} </span> : null}
                 </section>
 
                 <section className="form_input">
-                    <label htmlFor="apellidos">Apellidos</label>
+                    <label htmlFor="last_name">Apellidos</label>
                     <input 
                         placeholder="Ingresa tus apellidos" 
-                        id="apellidos" 
+                        id="last_name" 
+                        name="last_name" 
                         type="text"
+                        {...formik.getFieldProps('last_name')}
                     />
                 </section>
 
@@ -48,27 +78,44 @@ class Register extends React.Component {
                     <input 
                         placeholder="Ingresa tu correo" 
                         id="email" 
+                        name="email" 
                         type="email"
+                        required
+                        {...formik.getFieldProps('email')}
                     />
                 </section>
 
               <section className="form_input">
-                <label htmlFor="password">Contraseña</label>
-           <input
-                placeholder="Contraseña" id="password" type="password"
-              />
+                    <label htmlFor="password">Contraseña</label>
+                    <input
+                        placeholder="Contraseña" 
+                        id="password" 
+                        name="password" 
+                        type="password"
+                        required
+                        {...formik.getFieldProps('password')}
+                    />
               </section>
 
               <section className="form_input">
-                <label htmlFor="password_valid">Repite tu Contraseña</label>
-           <input
-                placeholder="Contraseña" id="password_valid" type="password"
-              />
+                    <label htmlFor="password_confirmation">Repite tu Contraseña</label>
+                    <input
+                        placeholder="Contraseña" 
+                        id="password_confirmation" 
+                        name="password_confirmation" 
+                        type="password"
+                        required
+                        {...formik.getFieldProps('password_confirmation')}
+                    />
+                    { formik.touched.password_confirmation && formik.errors.password_confirmation ? 
+                    <span> {formik.errors.password_confirmation} </span> : null}
               </section>
 
               <section className="form_input">
                   <button
-                    className="btn_primary"
+                      type="submit"
+                      className="btn_primary"
+                      // onClick={this.registerUser}
                     >
                     Registrarse
                   </button>
@@ -77,7 +124,7 @@ class Register extends React.Component {
 
       </section>
     );
-  }
+ 
 }
 
 export default Register;
