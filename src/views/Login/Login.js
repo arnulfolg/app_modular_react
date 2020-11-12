@@ -101,7 +101,7 @@ class Login extends React.Component {
 
     return (
       <section className="grid-cols">
-            <section className="banner grid-cols--item-2-4">
+            <section className="banner grid-cols--item-short">
               {/* <div className="flex flex-justify-center">
                 <img alt="Mi Dulce Hogar" src={logo_img} />
               </div> */}
@@ -109,7 +109,7 @@ class Login extends React.Component {
                 <p className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</p>
             </section>
 
-            <form autoComplete="off" className="form grid-cols--item-2-4" >
+            <form autoComplete="off" className="form grid-cols--item-short" >
 
                 <section className="form_input">
                     <label htmlFor="email">Correo</label>
@@ -136,7 +136,7 @@ class Login extends React.Component {
               </section>
             </form>
 
-            <section className="register grid-cols--item-2-4">
+            <section className="register grid-cols--item-short">
                 <section className="form_input">
                     <button>
                         ¡Registrarme!

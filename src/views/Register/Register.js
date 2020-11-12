@@ -14,7 +14,7 @@ class Register extends React.Component {
 
     return (
      <section className="grid-cols">
-            <section className="banner grid-cols--item-2-4">
+            <section className="banner grid-cols--item-short">
               {/* <div className="flex flex-justify-center">
                 <img alt="Mi Dulce Hogar" src={logo_img} />
               </div> */}
@@ -23,7 +23,7 @@ class Register extends React.Component {
               <p className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</p>
             </section>
 
-            <form autoComplete="off" className="form grid-cols--item-2-4" >
+            <form autoComplete="off" className="form grid-cols--item-short" >
 
                 <section className="form_input">
                     <label htmlFor="nombre">Nombre</label>
