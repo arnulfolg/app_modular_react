@@ -5,8 +5,14 @@ import './Profile.scss';
 
 class Profile extends React.Component {
 
+	state = {
+		userData: {}
+	}
+
   componentDidMount() {
-        
+		let loggedStatus = JSON.parse(localStorage.getItem('user'))
+		let userData = JSON.parse(localStorage.getItem(loggedStatus.email))
+		this.setState({userData})
   }
 
   render() {
@@ -17,8 +23,8 @@ class Profile extends React.Component {
 			  <div className="banner_profile_image"></div>
 		  </section>
 		  <section className="info grid-cols--item-short">
-				<p className="info_name">Nombre Apellido</p>
-				<p className="info_email">correo@example.com</p>
+				<p className="info_name">{`${this.state.userData.name} ${this.state.userData?.last_name}`}</p>
+				<p className="info_email">{this.state.userData.email}</p>
 		  </section>
 		<section className="register grid-cols--item-short">
 			<section className="form_input">

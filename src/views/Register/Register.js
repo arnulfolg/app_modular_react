@@ -6,12 +6,43 @@ import './Register.scss';
 
 function Register () {
 
+  const errorMessages = {
+    name : {
+      lenght: "Tu nombre debe ser menor a 20 caracteres",
+      required: "Escribe tu nombre"
+    },
+    last_name: {
+      lenght: "Tu apellido debe ser menor a 100 caracteres"
+    },
+    email: {
+      required: "Escribe tu correo electrónico"
+    },
+    password: {
+      lenght: "Tu contraseña debe ser mayor a 4 caracteres y menor a 20",
+      required: "Debes escribir una contraseña",
+      confirmation: "Tu contraseña debe de coincidir con la anterior",
+      regex: "Tu contraseña debe contener al menos un número y una mayúscula"
+    }
+  }
+
   const validationSchema = Yup.object({
-    name: Yup.string().max(20, 'Tu nombre debe ser menor a 20 caracteres').required('Escribe tu nombre'),
-    last_name: Yup.string().max(100),
-    email: Yup.string().email().required('Must be email'),
-    password: Yup.string().min(4).max(20).required('Must be at least 4 characters'),
-    password_confirmation: Yup.string().min(4).max(20).oneOf([Yup.ref('password'), null], 'Passwords must match').required('Confirma tu contraseña')
+    name: Yup.string()
+              .max(20, errorMessages.name.lenght)
+              .required(errorMessages.name.required),
+    last_name: Yup.string()
+                  .max(100, errorMessages.last_name.lenght),
+    email: Yup.string()
+              .email()
+              .required(errorMessages.email.required),
+    password: Yup.string()
+                  .min(4, errorMessages.password.lenght)
+                  .max(20, errorMessages.password.lenght)
+                  .required(errorMessages.password.required),
+    password_confirmation: Yup.string()
+                              .min(4, errorMessages.password.lenght)
+                              .max(20, errorMessages.password.lenght)
+                              .oneOf([Yup.ref('password'), null], errorMessages.password.confirmation)
+                              .required(errorMessages.password.regex)
   })
 
   const initialValues = {
@@ -24,7 +55,7 @@ function Register () {
   }
 
   const onSubmit = values => {
-    console.log(values)
+    createUser(values)
   }
 
   const formik = useFormik({
@@ -33,6 +64,24 @@ function Register () {
     validationSchema,
   });
 
+  const createUser = (user) => {
+    if(userExists(user.email)){
+      console.log("user already exists")
+    } else {
+      localStorage.setItem(user.email, JSON.stringify(user))
+    }
+    
+  }
+
+  const userExists = (user_email) => {
+    let local_user = JSON.parse(localStorage.getItem(user_email))
+    if(local_user === null){
+      return false
+    } else {
+      return true
+    }
+  }
+ 
 
     return (
      <section className="grid-cols">
@@ -71,6 +120,8 @@ function Register () {
                         type="text"
                         {...formik.getFieldProps('last_name')}
                     />
+                    { formik.touched.last_name && formik.errors.last_name ? 
+                    <span> {formik.errors.last_name} </span> : null}
                 </section>
 
                 <section className="form_input">
@@ -83,6 +134,8 @@ function Register () {
                         required
                         {...formik.getFieldProps('email')}
                     />
+                    { formik.touched.email && formik.errors.email ? 
+                    <span> {formik.errors.email} </span> : null}
                 </section>
 
               <section className="form_input">
@@ -95,6 +148,8 @@ function Register () {
                         required
                         {...formik.getFieldProps('password')}
                     />
+                    { formik.touched.passsword && formik.errors.passsword ? 
+                    <span> {formik.errors.passsword} </span> : null}
               </section>
 
               <section className="form_input">

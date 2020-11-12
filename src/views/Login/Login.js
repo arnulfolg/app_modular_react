@@ -1,12 +1,62 @@
 import React from "react";
 import './Login.scss';
+import { useFormik } from "formik";
+import * as Yup from "yup";
 // import { isPlatform } from '@ionic/react'
 // import _ from "lodash";
 
 
-class Login extends React.Component {
+function Login () {
 
-  render() {
+  const errorMessages = {
+    email: {
+      required: "Escribe tu correo electrónico"
+    },
+    password: {
+      required: "Debes escribir una contraseña"
+    }
+  }
+
+  const validationSchema = Yup.object({
+    email: Yup.string()
+              .email()
+              .required(errorMessages.email.required),
+    password: Yup.string()
+                  .required(errorMessages.password.required)
+  })
+
+  const initialValues = {
+        email: "",
+        password: ""
+  }
+
+  const onSubmit = values => {
+    loginUser(values)
+  }
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
+
+  const loginUser = (user) => {
+      let local_user = JSON.parse(localStorage.getItem(user.email))
+      if(local_user === null) {
+        console.log("user does not exist")
+      }else if(local_user.password === user.password) {
+         console.log("user logged in", local_user)
+         let loggedUser = {
+              status: true,
+              email: local_user.email
+         }
+         localStorage.setItem('user', JSON.stringify(loggedUser))
+      } else {
+        console.log("wrong password")
+      }
+     
+  }
+
 
     return (
       <section className="grid-cols">
@@ -18,7 +68,7 @@ class Login extends React.Component {
                 <p className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</p>
             </section>
 
-            <form autoComplete="off" className="form grid-cols--item-short" >
+            <form onSubmit={formik.handleSubmit} className="form grid-cols--item-short" >
 
                 <section className="form_input">
                     <label htmlFor="email">Correo</label>
@@ -26,18 +76,29 @@ class Login extends React.Component {
                         placeholder="Ingresa tu correo" 
                         id="email" 
                         type="email"
+                        required
+                        {...formik.getFieldProps('email')}
                     />
+                    { formik.touched.email && formik.errors.email ? 
+                    <span> {formik.errors.email} </span> : null}
                 </section>
 
               <section className="form_input">
                   <label htmlFor="password">Contraseña</label>
-                  <input
-                      placeholder="Contraseña" id="password" type="password"
-                  />
+                    <input 
+                        placeholder="Contraseña" 
+                        id="password" 
+                        type="password"
+                        required
+                        {...formik.getFieldProps('password')}
+                    />
+                    { formik.touched.password && formik.errors.password ? 
+                    <span> {formik.errors.password} </span> : null}
               </section>
 
               <section className="form_input">
                   <button
+                    type="submit"
                     className="btn_primary"
                     >
                     Entrar
@@ -56,7 +117,6 @@ class Login extends React.Component {
       </section>
 
     );
-  }
 }
 
 export default Login;
