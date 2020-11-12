@@ -106,7 +106,7 @@ class Login extends React.Component {
                 <img alt="Mi Dulce Hogar" src={logo_img} />
               </div> */}
                 <h2>Inicia sesion</h2>
-                <div className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</div>
+                <p className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</p>
             </section>
 
             <form autoComplete="off" className="form grid-cols--item-2-4" >

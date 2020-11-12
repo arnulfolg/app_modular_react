@@ -20,7 +20,7 @@ class Register extends React.Component {
               </div> */}
 			  <h2>Registrate</h2>
 
-              <div className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</div>
+              <p className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</p>
             </section>
 
             <form autoComplete="off" className="form grid-cols--item-2-4" >
