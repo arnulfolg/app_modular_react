@@ -30,12 +30,14 @@ const requireLogin = (to, from, next) => {
 
 class App extends React.Component {
 
+  getByText = "learn react"
+
   render() {
     
     return (
       <Router>
-        <Header />
-        <section className="main">
+        <Header data-testid="header" />
+        <section data-testid="main" className="main">
           <GuardProvider guards={[requireLogin]} >
             <Switch>
               <HttpsRedirect>

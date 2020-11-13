@@ -70,7 +70,7 @@ function Login (props) {
               {/* <div className="flex flex-justify-center">
                 <img alt="Mi Dulce Hogar" src={logo_img} />
               </div> */}
-                <h2>Inicia sesion</h2>
+                <h2 data-testid="login_title">Inicia sesion</h2>
                 <p className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</p>
             </section>
 
@@ -91,9 +91,11 @@ function Login (props) {
                         type="email"
                         required
                         {...formik.getFieldProps('email')}
-                    />
-                    { formik.touched.email && formik.errors.email ? 
-                    <span> {formik.errors.email} </span> : null}
+                    /> 
+                    <span data-testid="login_email_err">
+                        { formik.touched.email && formik.errors.email ? 
+                        formik.errors.email : null} 
+                    </span>
                 </section>
 
               <section className="form_input">
@@ -106,11 +108,12 @@ function Login (props) {
                         {...formik.getFieldProps('password')}
                     />
                     { formik.touched.password && formik.errors.password ? 
-                    <span> {formik.errors.password} </span> : null}
+                    <span data-testid="login_pass_err"> {formik.errors.password} </span> : null}
               </section>
 
               <section className="form_input">
                   <button
+                    data-testid="login_submit"
                     type="submit"
                     className="btn_primary"
                     >

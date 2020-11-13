@@ -14,7 +14,6 @@ class Home extends React.Component {
 		this.setState({
 			photos: await getHomeImages()
 		})
-		console.log(this.state.photos)
 	}
 
 
