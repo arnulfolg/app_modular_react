@@ -40,7 +40,7 @@ function Login (props) {
   const onSubmit = values => {
     let response = logIn(values)
     if(response.status) {
-      props.history.push('/profile')
+	    window.location.href = "/profile";
     } else if(response.error === 20) {
       let newFormState = {
         message: "El usuario no existe",

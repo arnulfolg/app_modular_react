@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import HttpsRedirect from 'react-https-redirect';
-import ReactGA from 'react-ga';
-import { createBrowserHistory } from "history";
 import { GuardProvider, GuardedRoute } from "react-router-guards";
 
 import Login from "./views/Login/Login"
@@ -13,12 +11,6 @@ import Footer from "./components/Footer/Footer";
 import Home from './views/Home/Home';
 import { isLoggedIn } from "./components/Auth/Auth";
 
-const history = createBrowserHistory();
-history.listen(location => {
-  ReactGA.set({ page: location.pathname })
-  ReactGA.pageview(location.pathname)
-  // alert("entro path")
-} )
 
 const requireLogin = (to, from, next) => {
   if (to.meta.auth) {
@@ -41,7 +33,7 @@ class App extends React.Component {
   render() {
     
     return (
-      <Router history={history}>
+      <Router>
         <Header />
         <section className="main">
           <GuardProvider guards={[requireLogin]} >

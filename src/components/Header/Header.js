@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Fragment } from "react";
 import './Header.scss';
-import { logOut } from "./../Auth/Auth";
+import { logOut, isLoggedIn } from "./../Auth/Auth";
 
 import { Link } from "react-router-dom";
 // import { isPlatform } from '@ionic/react'
@@ -15,7 +15,7 @@ class Header extends React.Component {
 
   cerrarSesion() {
 	logOut()
-	 window.location.href = "/";
+	window.location.href = "/";
   }
 
   render() {
@@ -30,18 +30,27 @@ class Header extends React.Component {
 					</Link>
 				  </li>
 				  <span className="separator"/>
-				  <li>
-					  <Link to="/login">Login</Link>
-				  </li>
-				  <li>
-					  <Link to="/register">Register</Link>
-				  </li>
-				  <li>
-					  <Link to="/profile">Profile</Link>
-				  </li>
-				  <li>
-					  <button className="btn_transparent" onClick={this.cerrarSesion}>Cerrar sesión</button>
-				  </li>
+				  {!isLoggedIn() && 
+				  	<Fragment>
+						<li>
+							<Link to="/login">Login</Link>
+						</li>
+						<li>
+							<Link to="/register">Register</Link>
+						</li>
+					</Fragment>
+				  }
+				  {isLoggedIn() && 
+				  	<Fragment>
+						<li>
+							<Link to="/profile">Profile</Link>
+						</li>
+						<li>
+							<button className="btn_transparent" onClick={this.cerrarSesion}>Cerrar sesión</button>
+						</li>	
+					</Fragment>
+				  }
+
 			  </ul>
 		  </nav>
       </header>

@@ -73,7 +73,7 @@ function Register (props) {
   const crearUsuario = user => {
     let response = createUser(user)
     if(response.status) {
-      props.history.push('/profile')
+	    window.location.href = "/profile";
     } else if(response.error === 40) {
       let newFormState = {
         message: "El usuario ya existe, por favor ingresa otro correo",
