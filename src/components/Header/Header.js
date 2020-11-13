@@ -1,5 +1,6 @@
 import React from "react";
 import './Header.scss';
+import { logOut } from "./../Auth/Auth";
 
 import { Link } from "react-router-dom";
 // import { isPlatform } from '@ionic/react'
@@ -7,8 +8,14 @@ import { Link } from "react-router-dom";
 
 class Header extends React.Component {
 
+  
   componentDidMount() {
         
+  }
+
+  cerrarSesion() {
+	logOut()
+	 window.location.href = "/";
   }
 
   render() {
@@ -33,7 +40,7 @@ class Header extends React.Component {
 					  <Link to="/profile">Profile</Link>
 				  </li>
 				  <li>
-					  <button className="btn_transparent">Cerrar sesión</button>
+					  <button className="btn_transparent" onClick={this.cerrarSesion}>Cerrar sesión</button>
 				  </li>
 			  </ul>
 		  </nav>

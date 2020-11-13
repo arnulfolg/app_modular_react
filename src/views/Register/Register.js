@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import './Register.scss';
+import { createUser } from "./../../components/Auth/Auth";
 
 
-function Register () {
+function Register (props) {
+  const [formError, setFormError] = useState({
+      message: "This is an error",
+      status: false,
+      error: 0
+    })
 
   const errorMessages = {
     name : {
@@ -55,7 +61,7 @@ function Register () {
   }
 
   const onSubmit = values => {
-    createUser(values)
+    crearUsuario(values)
   }
 
   const formik = useFormik({
@@ -64,21 +70,17 @@ function Register () {
     validationSchema,
   });
 
-  const createUser = (user) => {
-    if(userExists(user.email)){
-      console.log("user already exists")
-    } else {
-      localStorage.setItem(user.email, JSON.stringify(user))
-    }
-    
-  }
-
-  const userExists = (user_email) => {
-    let local_user = JSON.parse(localStorage.getItem(user_email))
-    if(local_user === null){
-      return false
-    } else {
-      return true
+  const crearUsuario = user => {
+    let response = createUser(user)
+    if(response.status) {
+      props.history.push('/profile')
+    } else if(response.error = 40) {
+      let newFormState = {
+        message: "El usuario ya existe, por favor ingresa otro correo",
+        status: true,
+        error: response.error
+      }
+      setFormError(newFormState)
     }
   }
  
@@ -95,6 +97,12 @@ function Register () {
             </section>
 
             <form onSubmit={formik.handleSubmit} autoComplete="off" className="form grid-cols--item-short" >
+
+              {formError.status === true &&
+                 <section className="form_input form_input__error">
+                    <label>{formError.message}</label>
+                </section>
+              }
 
                 <section className="form_input">
                     <label htmlFor="name">Nombre</label>

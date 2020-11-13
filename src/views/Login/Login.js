@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import './Login.scss';
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { logIn } from  "./../../components/Auth/Auth";
 // import { isPlatform } from '@ionic/react'
 // import _ from "lodash";
 
 
-function Login () {
+function Login (props) {
+
+  const [formError, setFormError] = useState({
+        message: "This is an error",
+        status: false,
+        error: 0
+      })
 
   const errorMessages = {
     email: {
@@ -31,7 +38,24 @@ function Login () {
   }
 
   const onSubmit = values => {
-    loginUser(values)
+    let response = logIn(values)
+    if(response.status) {
+      props.history.push('/profile')
+    } else if(response.error === 20) {
+      let newFormState = {
+        message: "El usuario no existe",
+        status: true,
+        error: response.error
+      }
+      setFormError(newFormState)
+    } else if(response.error === 30) {
+       let newFormState = {
+          message: "La contraseña es incorrecta",
+          status: true,
+          error: response.error
+        }
+      setFormError(newFormState)
+    }
   }
 
   const formik = useFormik({
@@ -39,24 +63,6 @@ function Login () {
     onSubmit,
     validationSchema,
   });
-
-  const loginUser = (user) => {
-      let local_user = JSON.parse(localStorage.getItem(user.email))
-      if(local_user === null) {
-        console.log("user does not exist")
-      }else if(local_user.password === user.password) {
-         console.log("user logged in", local_user)
-         let loggedUser = {
-              status: true,
-              email: local_user.email
-         }
-         localStorage.setItem('user', JSON.stringify(loggedUser))
-      } else {
-        console.log("wrong password")
-      }
-     
-  }
-
 
     return (
       <section className="grid-cols">
@@ -69,6 +75,13 @@ function Login () {
             </section>
 
             <form onSubmit={formik.handleSubmit} className="form grid-cols--item-short" >
+
+              {formError.status === true &&
+                 <section className="form_input form_input__error">
+                    <label>{formError.message}</label>
+                </section>
+              }
+               
 
                 <section className="form_input">
                     <label htmlFor="email">Correo</label>
