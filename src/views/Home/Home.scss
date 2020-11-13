@@ -4,6 +4,10 @@ section.gallery {
 	grid-auto-flow: row;
 	grid-gap: 1rem;
 
+    @supports not (grid-template-columns: subgrid) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
 	.gallery_item img {
 		width: 100%;
 	}

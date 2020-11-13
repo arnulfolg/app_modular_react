@@ -16,6 +16,10 @@
     grid-template-columns: subgrid;
     grid-template-areas: ". nav .";
 
+    @supports not (grid-template-columns: subgrid) {
+      grid-template-columns: 1fr minmax(auto, 1440px) 1fr;
+    }
+
     nav {
       grid-area: nav;
     }

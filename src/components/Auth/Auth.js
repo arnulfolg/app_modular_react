@@ -37,7 +37,7 @@ const logIn = (user) => {
 
 const isLoggedIn = () => {
 	let local_user = readLocalStorage('user')
-	if(local_user.status) {
+	if(local_user?.status) {
 		return true
 	} else {
 		return false
