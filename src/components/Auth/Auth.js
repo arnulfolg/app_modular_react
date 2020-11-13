@@ -34,12 +34,22 @@ const logIn = (user) => {
      
   }
 
-  const logOut = () => {
-		let loggedUser = {
-			status: false
-		}
-		writeLocalStorage('user', loggedUser)
-  }
+
+const isLoggedIn = () => {
+	let local_user = readLocalStorage('user')
+	if(local_user.status) {
+		return true
+	} else {
+		return false
+	}
+}
+
+const logOut = () => {
+	let loggedUser = {
+		status: false
+	}
+	writeLocalStorage('user', loggedUser)
+}
 
   
   const createUser = (user) => {
@@ -71,4 +81,4 @@ const logIn = (user) => {
     }
   }
 
-  export { logIn, logOut, createUser }
+  export { logIn, logOut, createUser, isLoggedIn }
