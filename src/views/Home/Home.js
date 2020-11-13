@@ -1,8 +1,22 @@
 import React from "react";
 import './Home.scss';
+import { getHomeImages } from "./../../components/API/Unsplash";
 // import { isPlatform } from '@ionic/react'
 
 class Home extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {photos: []};
+  	}
+
+	async componentDidMount() {
+		this.setState({
+			photos: await getHomeImages()
+		})
+		console.log(this.state.photos)
+	}
+
 
   render() {
 
@@ -11,28 +25,14 @@ class Home extends React.Component {
 		  <section className="grid-cols--item-long">
 			  <h1>Bienvenido a Mi Dulce Hogar</h1>
 		  </section>
+	{/* <pre>{this.state.photos}</pre> */}
 		  <section className="gallery grid-cols--item-long">
-				<section className="gallery_item">
-					<img src="https://picsum.photos/500/300" alt=""/>
-				</section>
-				<section className="gallery_item">
-					<img src="https://picsum.photos/500/300" alt=""/>
-				</section>
-				<section className="gallery_item">
-					<img src="https://picsum.photos/500/300" alt=""/>
-				</section>
-				<section className="gallery_item">
-					<img src="https://picsum.photos/500/300" alt=""/>
-				</section>
-				<section className="gallery_item">
-					<img src="https://picsum.photos/500/300" alt=""/>
-				</section>
-				<section className="gallery_item">
-					<img src="https://picsum.photos/500/300" alt=""/>
-				</section>
-				<section className="gallery_item">
-					<img src="https://picsum.photos/500/300" alt=""/>
-				</section>
+			  {this.state.photos.map((photo, index) => 
+					<section key={index} className="gallery_item">
+						<img src={photo.urls.small} alt=""/>
+					</section>
+			  )}
+			
 		  </section>
       </section>
 
