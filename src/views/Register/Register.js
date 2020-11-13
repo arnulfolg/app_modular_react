@@ -31,6 +31,8 @@ function Register (props) {
     }
   }
 
+  const passwordRegex = /^(?=.*?[A-Z])(?=.*?[0-9])[a-zA-Z0-9]{4,20}$/
+
   const validationSchema = Yup.object({
     name: Yup.string()
               .max(20, errorMessages.name.lenght)
@@ -40,24 +42,25 @@ function Register (props) {
     email: Yup.string()
               .email()
               .required(errorMessages.email.required),
-    password: Yup.string()
+    password_1: Yup.string()
                   .min(4, errorMessages.password.lenght)
                   .max(20, errorMessages.password.lenght)
+                  .matches(passwordRegex, errorMessages.password.regex)
                   .required(errorMessages.password.required),
-    password_confirmation: Yup.string()
-                              .min(4, errorMessages.password.lenght)
-                              .max(20, errorMessages.password.lenght)
-                              .oneOf([Yup.ref('password'), null], errorMessages.password.confirmation)
-                              .required(errorMessages.password.regex)
+    password_2: Yup.string()
+                  .min(4, errorMessages.password.lenght)
+                  .max(20, errorMessages.password.lenght)
+                  .matches(passwordRegex, errorMessages.password.regex)
+                  .oneOf([Yup.ref('password'), null], errorMessages.password.confirmation)
+                  .required(errorMessages.password.regex)
   })
 
   const initialValues = {
         name: "",
         last_name: "",
         email: "",
-        password: "",
-        password_confirmation: "",
-        password_valid: false
+        password_1: "",
+        password_2: ""
   }
 
   const onSubmit = values => {
@@ -147,31 +150,31 @@ function Register (props) {
                 </section>
 
               <section className="form_input">
-                    <label htmlFor="password">Contraseña</label>
+                    <label htmlFor="password_1">Contraseña</label>
                     <input
                         placeholder="Contraseña" 
-                        id="password" 
-                        name="password" 
+                        id="password_1" 
+                        name="password_1" 
                         type="password"
                         required
-                        {...formik.getFieldProps('password')}
+                        {...formik.getFieldProps('password_1')}
                     />
-                    { formik.touched.passsword && formik.errors.passsword ? 
-                    <span> {formik.errors.passsword} </span> : null}
+                    { formik.touched.password_1 && formik.errors.password_1 ? 
+                    <span> {formik.errors.password_1} </span> : null}
               </section>
 
               <section className="form_input">
-                    <label htmlFor="password_confirmation">Repite tu Contraseña</label>
+                    <label htmlFor="password_2">Repite tu Contraseña</label>
                     <input
                         placeholder="Contraseña" 
-                        id="password_confirmation" 
-                        name="password_confirmation" 
+                        id="password_2" 
+                        name="password_2" 
                         type="password"
                         required
-                        {...formik.getFieldProps('password_confirmation')}
+                        {...formik.getFieldProps('password_2')}
                     />
-                    { formik.touched.password_confirmation && formik.errors.password_confirmation ? 
-                    <span> {formik.errors.password_confirmation} </span> : null}
+                    { formik.touched.password_2 && formik.errors.password_2 ? 
+                    <span> {formik.errors.password_2} </span> : null}
               </section>
 
               <section className="form_input">
