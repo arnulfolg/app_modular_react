@@ -7,14 +7,19 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.21.0",
+    "formik": "^2.2.5",
     "history": "^4.10.1",
+    "node-sass": "^4.14.1",
     "react": "^16.12.0",
     "react-burger-menu": "^2.6.13",
     "react-dom": "^16.12.0",
     "react-ga": "^2.7.0",
     "react-https-redirect": "^1.1.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0"
+    "react-router-guards": "^1.0.2",
+    "react-scripts": "3.4.0",
+    "yup": "^0.29.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -36,5 +41,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest-localstorage-mock": "^2.4.3",
+    "mock-local-storage": "^1.1.15"
   }
 }

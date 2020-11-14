@@ -1,0 +1,17 @@
+
+$base-color: #18284A;
+$base-color-dark: darken($base-color, 5%);
+$base-color-light: lighten($base-color, 5%);
+$gray-color: #F3F3F3;
+
+
+:root {
+  --blue-primary: #{$base-color};
+  --blue-shadow: #{rgba($base-color-light, .65)};
+  --blue-lighten: #{$base-color-light};
+  --blue-darken: #{$base-color-dark};
+  --gray-color: #{$gray-color};
+  --headers-color: var(--blue-primary);
+  --error-color: #4a1818;
+  --error-bg-color: #FFC6C6;
+}

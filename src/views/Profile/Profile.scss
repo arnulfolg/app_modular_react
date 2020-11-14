@@ -1,0 +1,43 @@
+//Tamaño de fila para la imagen de perfil.
+//Esta variable asegura que se mantengan las proporciones de la imagen de fondo con la imagen de perfil. De esta manera el grid en el que se encuentran posicionados asegura que la imagen circular siempre estará un tercio de su altura por debajo de la imagen de fondo.
+$row-height: 5rem;
+
+section.profile {
+	.banner {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(5, $row-height);
+
+		.banner_bg_image {
+			grid-column: 1/-1;
+			grid-row: 1/5;
+			background-position: center; 
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		.banner_profile_image {
+			grid-column: 2/3;
+			grid-row: 3/-1;
+
+			height: $row-height*3;
+			width: $row-height*3;
+			// background-color: var(--blue-primary);
+			border-radius: 50%;
+			justify-self: center;
+			background-image: url("/assets/chalino.jpg");
+			background-position: center; 
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+	}
+
+	.info {
+		text-align: center;
+
+		.info_name {
+			font-size: 2rem;
+			font-weight: bold;
+		}
+	}
+}

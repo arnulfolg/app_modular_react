@@ -1,0 +1,24 @@
+@import url("https://meyerweb.com/eric/tools/css/reset/reset.css");
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,500&display=swap');
+
+html {
+	box-sizing: border-box;
+	font-size: 12px;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    font-family: "IBM Plex Sans", sans-serif;
+    background-color: var(--gray-color);
+    font-size: 12px;
+}
+
+@import './styles/variables';
+@import './styles/text';
+@import './styles/input';
+@import './styles/grid';

@@ -1,0 +1,126 @@
+
+section.form_input {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: stretch;
+  margin: 1.5rem 0;
+
+  &.form_submit {
+    margin-top: 2rem;
+  }
+
+  label {
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+  }
+
+  input {
+    height: 3.7rem;
+    font-size: 1.4rem;
+    border-radius: 0.4rem;
+    border: 2px solid lightgray;
+    padding: 1rem;
+    background-clip: padding-box;
+    transition: all 0.1s ease-in-out;
+
+    &:focus {
+      outline: 0;
+      border-color: var(--blue-primary);
+      box-shadow: 0 0 0 .15rem var(--blue-shadow);
+    }
+  }
+
+  &.form_error {
+    background-color: var(--error-bg-color);
+    padding: 1rem;
+    border-radius: 0.4rem;
+    background-color: var(--error-bg-color);
+    color: var(--error-color);
+
+    p {
+      font-weight: bold;
+      color: var(--error-color);
+    }
+  }
+
+  span.form_input__error {
+    font-size: 1.2rem;
+    padding: 0.3rem 0.5rem 0.5rem 0.5rem;
+    border-radius: 0 0 0.4rem 0.4rem;
+    background-color: var(--error-bg-color);
+    color: var(--error-color);
+  }
+}
+
+
+button {
+  height: 3.7rem;
+  font-size: 1.4rem;
+  background-color: white;
+  color: var(--blue-primary);
+  border-radius: 0.3rem;
+  border: 1px solid var(--blue-primary);
+  padding: 1rem;
+  width: 100%;
+
+  &:hover {
+    background-color: darken(white, 15%);
+    color: var(--headers-color);
+  }
+
+  &:focus {
+    background-color: darken(white, 15%);
+    box-shadow: 0 0 0 .15rem darken(white, 15%);
+    color: var(--headers-color);
+  }
+
+  &:active {
+      background-color: darken(white, 10%);
+    color: var(--headers-color);
+  }
+
+    &.btn_primary {
+      background-color: var(--blue-primary);
+      color: white;
+
+      &:hover {
+        background-color: var(--blue-lighten);
+      }
+
+      &:focus {
+        background-color: var(--blue-lighten);
+        box-shadow: 0 0 0 .15rem var(--blue-lighten);
+      }
+
+      &:active {
+         background-color: var(--blue-darken);
+      }
+    }
+
+    &.btn_transparent {
+      background-color: transparent;
+      color: white;
+      border: 1px solid white;
+      padding: 0.3rem 0.8rem;
+
+      &:hover {
+        background-color: darken(white, 5%);
+        color: var(--headers-color);
+      }
+
+      &:focus {
+        background-color: darken(white, 5%);
+        box-shadow: 0 0 0 .15rem darken(white, 5%);
+        color: var(--headers-color);
+      }
+
+      &:active {
+         background-color: darken(white, 10%);
+        color: var(--headers-color);
+      }
+    }
+}
+
