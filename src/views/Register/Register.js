@@ -94,7 +94,7 @@ function Register (props) {
     return (
      <section className="grid-cols">
             <section className="banner grid-cols--item-short">
-			  <h2>Registrate</h2>
+			  <h2>Regístrate</h2>
 
               <p className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</p>
             </section>

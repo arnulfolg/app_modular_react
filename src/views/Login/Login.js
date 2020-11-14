@@ -68,7 +68,7 @@ function Login (props) {
     return (
       <section className="grid-cols">
             <section className="banner grid-cols--item-short">
-                <h2 data-testid="login_title">Inicia sesion</h2>
+                <h2 data-testid="login_title">Iniciar sesión</h2>
                 <p className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</p>
             </section>
 
