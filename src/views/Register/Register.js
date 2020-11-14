@@ -120,7 +120,10 @@ function Register (props) {
                         {...formik.getFieldProps('name')}
                     />
                     { formik.touched.name && formik.errors.name ? 
-                    <span className="form_input__error"> {formik.errors.name} </span> : null}
+                        <span className="form_input__error"> 
+                          {formik.errors.name} 
+                        </span> : null
+                    }
                    
                 </section>
 
