@@ -3,9 +3,6 @@ import './Login.scss';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { logIn } from  "./../../components/Auth/Auth";
-// import { isPlatform } from '@ionic/react'
-// import _ from "lodash";
-
 
 function Login (props) {
 
@@ -56,6 +53,10 @@ function Login (props) {
         }
       setFormError(newFormState)
     }
+  }
+
+  const goToRegister = () => {
+    props.history.push('/register')
   }
 
   const formik = useFormik({
@@ -120,7 +121,10 @@ function Login (props) {
 
             <section className="register grid-cols--item-short">
                 <section className="form_input">
-                    <button>
+                    <button
+                      type="button"
+                      onClick={goToRegister}
+                    >
                         ¡Registrarme!
                     </button>
                 </section>

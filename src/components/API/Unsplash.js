@@ -6,7 +6,7 @@ const instance = axios.create({
 });
 
 const getHomeImages = () => {
-	return instance.get(`collections/354267/photos?orientation=landscape`)
+	return instance.get(`collections/354267/photos?orientation=landscape&per_page=12`)
 		.then(res => {
 			return res.data
 		})

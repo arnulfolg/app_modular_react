@@ -11,7 +11,7 @@ class Footer extends React.Component {
 
     return (
       <footer>
-		    <p data-testid="footer_copyright">&copy; 2020 Arnulfo Loredo</p>
+		    <p data-testid="footer_copyright" className="footer_copyright">&copy; 2020 Arnulfo Loredo</p>
       </footer>
     );
   }
