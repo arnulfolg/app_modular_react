@@ -42,7 +42,7 @@ function Register (props) {
     email: Yup.string()
               .email()
               .required(errorMessages.email.required),
-    password_1: Yup.string()
+    password: Yup.string()
                   .min(4, errorMessages.password.lenght)
                   .max(20, errorMessages.password.lenght)
                   .matches(passwordRegex, errorMessages.password.regex)
@@ -59,7 +59,7 @@ function Register (props) {
         name: "",
         last_name: "",
         email: "",
-        password_1: "",
+        password: "",
         password_2: ""
   }
 
@@ -150,17 +150,17 @@ function Register (props) {
                 </section>
 
               <section className="form_input">
-                    <label htmlFor="password_1">Contraseña</label>
+                    <label htmlFor="password">Contraseña</label>
                     <input
                         placeholder="Contraseña" 
-                        id="password_1" 
-                        name="password_1" 
+                        id="password" 
+                        name="password" 
                         type="password"
                         required
-                        {...formik.getFieldProps('password_1')}
+                        {...formik.getFieldProps('password')}
                     />
-                    { formik.touched.password_1 && formik.errors.password_1 ? 
-                    <span> {formik.errors.password_1} </span> : null}
+                    { formik.touched.password && formik.errors.password ? 
+                    <span> {formik.errors.password} </span> : null}
               </section>
 
               <section className="form_input">

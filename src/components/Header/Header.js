@@ -25,34 +25,35 @@ class Header extends React.Component {
 		  <nav>
 			  <ul>
 				  <li>
-					<Link to="/">
-						<img src="./assets/logo.png" alt="Mi Dulce Hogar"/>
+					<Link to="/" data-testid="header_home">
+						<img src="./assets/logo.png" data-testid="header_home_img" alt="Mi Dulce Hogar"/>
 					</Link>
 				  </li>
 				  <span className="separator"/>
 				  {!isLoggedIn() && 
 				  	<Fragment>
 						<li>
-							<Link to="/login">Login</Link>
+							<Link to="/login" data-testid="header_login">Iniciar Sesión</Link>
 						</li>
 						<li>
-							<Link to="/register">Register</Link>
+							<Link to="/register" data-testid="header_register">Registrarse</Link>
 						</li>
 					</Fragment>
 				  }
 				  {isLoggedIn() && 
 				  	<Fragment>
 						<li>
-							<Link to="/profile">Profile</Link>
+							<Link to="/profile" data-testid="header_profile">Perfil</Link>
 						</li>
 						<li>
-							<button className="btn_transparent" onClick={this.cerrarSesion}>Cerrar sesión</button>
+							<button className="btn_transparent" onClick={this.cerrarSesion} data-testid="header_close_session">Cerrar sesión</button>
 						</li>	
 					</Fragment>
 				  }
 
 			  </ul>
 		  </nav>
+
       </header>
     );
   }

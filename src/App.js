@@ -30,8 +30,6 @@ const requireLogin = (to, from, next) => {
 
 class App extends React.Component {
 
-  getByText = "learn react"
-
   render() {
     
     return (

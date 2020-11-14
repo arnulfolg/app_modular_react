@@ -6,15 +6,12 @@ import './Footer.scss';
 
 class Footer extends React.Component {
 
-  componentDidMount() {
-        
-  }
 
   render() {
 
     return (
       <footer>
-		  <p>This is the footer</p>
+		    <p data-testid="footer_copyright">&copy; 2020 Arnulfo Loredo</p>
       </footer>
     );
   }
