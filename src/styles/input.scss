@@ -8,6 +8,10 @@ section.form_input {
   align-items: stretch;
   margin: 1.5rem 0;
 
+  &.form_submit {
+    margin-top: 2rem;
+  }
+
   label {
     margin-bottom: 0.5rem;
     font-size: 1.4rem;
@@ -29,6 +33,29 @@ section.form_input {
     }
   }
 
+  &.form_error {
+    background-color: var(--error-bg-color);
+    // height: 4rem;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    background-color: var(--error-bg-color);
+    color: var(--error-color);
+
+    p {
+      font-weight: bold;
+      color: var(--error-color);
+    }
+  }
+
+  span.form_input__error {
+    font-size: 1.2rem;
+    height: 2rem;
+    padding-top: 0.3rem;
+    padding-left: 0.5rem;
+    border-radius: 0 0 0.4rem 0.4rem;
+    background-color: var(--error-bg-color);
+    color: var(--error-color);
+  }
 }
 
 

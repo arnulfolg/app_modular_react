@@ -21,6 +21,8 @@ function Register (props) {
       lenght: "Tu apellido debe ser menor a 100 caracteres"
     },
     email: {
+      format: "Escribe un correo electrónico váldo",
+      lenght: "Tu correo debe ser de al menos 10 caracteres",
       required: "Escribe tu correo electrónico"
     },
     password: {
@@ -40,7 +42,8 @@ function Register (props) {
     last_name: Yup.string()
                   .max(100, errorMessages.last_name.lenght),
     email: Yup.string()
-              .email()
+              .email(errorMessages.email.format)
+              .min(10, errorMessages.email.lenght)
               .required(errorMessages.email.required),
     password: Yup.string()
                   .min(4, errorMessages.password.lenght)
@@ -91,9 +94,6 @@ function Register (props) {
     return (
      <section className="grid-cols">
             <section className="banner grid-cols--item-short">
-              {/* <div className="flex flex-justify-center">
-                <img alt="Mi Dulce Hogar" src={logo_img} />
-              </div> */}
 			  <h2>Registrate</h2>
 
               <p className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</p>
@@ -102,8 +102,9 @@ function Register (props) {
             <form onSubmit={formik.handleSubmit} autoComplete="off" className="form grid-cols--item-short" >
 
               {formError.status === true &&
-                 <section className="form_input form_input__error">
-                    <label>{formError.message}</label>
+                 <section className="form_input form_error">
+                    <p>Hubo un error :c</p>
+                    <label htmlFor="email">{formError.message}</label>
                 </section>
               }
 
@@ -119,7 +120,8 @@ function Register (props) {
                         {...formik.getFieldProps('name')}
                     />
                     { formik.touched.name && formik.errors.name ? 
-                    <span> {formik.errors.name} </span> : null}
+                    <span className="form_input__error"> {formik.errors.name} </span> : null}
+                   
                 </section>
 
                 <section className="form_input">
@@ -132,7 +134,7 @@ function Register (props) {
                         {...formik.getFieldProps('last_name')}
                     />
                     { formik.touched.last_name && formik.errors.last_name ? 
-                    <span> {formik.errors.last_name} </span> : null}
+                    <span className="form_input__error"> {formik.errors.last_name} </span> : null}
                 </section>
 
                 <section className="form_input">
@@ -146,7 +148,7 @@ function Register (props) {
                         {...formik.getFieldProps('email')}
                     />
                     { formik.touched.email && formik.errors.email ? 
-                    <span> {formik.errors.email} </span> : null}
+                    <span className="form_input__error"> {formik.errors.email} </span> : null}
                 </section>
 
               <section className="form_input">
@@ -160,7 +162,7 @@ function Register (props) {
                         {...formik.getFieldProps('password')}
                     />
                     { formik.touched.password && formik.errors.password ? 
-                    <span> {formik.errors.password} </span> : null}
+                    <span className="form_input__error"> {formik.errors.password} </span> : null}
               </section>
 
               <section className="form_input">
@@ -174,14 +176,13 @@ function Register (props) {
                         {...formik.getFieldProps('password_2')}
                     />
                     { formik.touched.password_2 && formik.errors.password_2 ? 
-                    <span> {formik.errors.password_2} </span> : null}
+                    <span className="form_input__error"> {formik.errors.password_2} </span> : null}
               </section>
 
-              <section className="form_input">
+              <section className="form_input form_submit">
                   <button
                       type="submit"
                       className="btn_primary"
-                      // onClick={this.registerUser}
                     >
                     Registrarse
                   </button>

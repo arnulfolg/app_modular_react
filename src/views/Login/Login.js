@@ -67,9 +67,6 @@ function Login (props) {
     return (
       <section className="grid-cols">
             <section className="banner grid-cols--item-short">
-              {/* <div className="flex flex-justify-center">
-                <img alt="Mi Dulce Hogar" src={logo_img} />
-              </div> */}
                 <h2 data-testid="login_title">Inicia sesion</h2>
                 <p className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</p>
             </section>
@@ -77,7 +74,8 @@ function Login (props) {
             <form onSubmit={formik.handleSubmit} className="form grid-cols--item-short" >
 
               {formError.status === true &&
-                 <section className="form_input form_input__error">
+                 <section className="form_input form_error">
+                    <p>Hubo un error :c</p>
                     <label>{formError.message}</label>
                 </section>
               }
@@ -92,10 +90,8 @@ function Login (props) {
                         required
                         {...formik.getFieldProps('email')}
                     /> 
-                    <span data-testid="login_email_err">
-                        { formik.touched.email && formik.errors.email ? 
-                        formik.errors.email : null} 
-                    </span>
+                    { formik.touched.email && formik.errors.email ? 
+                    <span className="form_input__error" data-testid="login_email_err"> {formik.errors.email} </span> : null}
                 </section>
 
               <section className="form_input">
@@ -108,10 +104,10 @@ function Login (props) {
                         {...formik.getFieldProps('password')}
                     />
                     { formik.touched.password && formik.errors.password ? 
-                    <span data-testid="login_pass_err"> {formik.errors.password} </span> : null}
+                    <span className="form_input__error" data-testid="login_pass_err"> {formik.errors.password} </span> : null}
               </section>
 
-              <section className="form_input">
+              <section className="form_input form_submit">
                   <button
                     data-testid="login_submit"
                     type="submit"
