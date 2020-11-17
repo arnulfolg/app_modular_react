@@ -51,11 +51,8 @@ function Register (props) {
                   .matches(passwordRegex, errorMessages.password.regex)
                   .required(errorMessages.password.required),
     password_2: Yup.string()
-                  .min(4, errorMessages.password.lenght)
-                  .max(20, errorMessages.password.lenght)
-                  .matches(passwordRegex, errorMessages.password.regex)
                   .oneOf([Yup.ref('password'), null], errorMessages.password.confirmation)
-                  .required(errorMessages.password.regex)
+                  .required(errorMessages.password.required)
   })
 
   const initialValues = {

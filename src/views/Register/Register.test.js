@@ -214,22 +214,200 @@ describe("Register Form Test Suite", () => {
 		})
 
 		describe('First Password errors', () => {
-			test.todo('First Password should be at least 4 characters')
-			test.todo('First Password should be less than 20 characters')
-			test.todo('First Password should have at least 1 uppercase and 1 number')
-			test.todo('First Password is required')
+			test('First Password should be at least 4 characters', async () => {
+				const {getByTestId, queryByTestId} = render(<Register />)
+
+				await wait(() => {
+					const input = getByTestId('input_password')
+					fireEvent.change(input, {
+						target: { value: 'pas'}
+					})
+					fireEvent.blur(input)
+				})
+				
+				expect(queryByTestId('input_password_error')).toBeInTheDocument()
+				expect(getByTestId('input_password_error')).toHaveTextContent('Tu contraseña debe ser mayor a 4 caracteres y menor a 20')
+
+			})
+			test('First Password should be less than 20 characters', async () => {
+				const {getByTestId, queryByTestId} = render(<Register />)
+
+				await wait(() => {
+					const input = getByTestId('input_password')
+					fireEvent.change(input, {
+						target: { value: 'passwordjusttoooolong'}
+					})
+					fireEvent.blur(input)
+				})
+				
+				expect(queryByTestId('input_password_error')).toBeInTheDocument()
+				expect(getByTestId('input_password_error')).toHaveTextContent('Tu contraseña debe ser mayor a 4 caracteres y menor a 20')
+
+			})
+
+			test('First Password should have at least 1 uppercase and 1 number', async () => {
+				const {getByTestId, queryByTestId} = render(<Register />)
+
+				await wait(() => {
+					const input = getByTestId('input_password')
+					fireEvent.change(input, {
+						target: { value: 'password'}
+					})
+					fireEvent.blur(input)
+				})
+				
+				expect(queryByTestId('input_password_error')).toBeInTheDocument()
+				expect(getByTestId('input_password_error')).toHaveTextContent('Tu contraseña debe contener al menos un número y una mayúscula')
+
+			})
+
+			test('First Password is required', async () => {
+				const {getByTestId, queryByTestId} = render(<Register />)
+
+				await wait(() => {
+					const input = getByTestId('input_password')
+					fireEvent.change(input, {
+						target: { value: ''}
+					})
+					fireEvent.blur(input)
+				})
+				
+				expect(queryByTestId('input_password_error')).toBeInTheDocument()
+				expect(getByTestId('input_password_error')).toHaveTextContent('Debes escribir una contraseña')
+
+			})
+
+			test('First Password is correct', async () => {
+				const {getByTestId, queryByTestId} = render(<Register />)
+
+				await wait(() => {
+					const input = getByTestId('input_password')
+					fireEvent.change(input, {
+						target: { value: 'P4ss'}
+					})
+					fireEvent.blur(input)
+				})
+				
+				expect(queryByTestId('input_password_error')).not.toBeInTheDocument()
+
+			})
+
 		})
 
 		describe('Second Password errors', () => {
-			test.todo('Second Password should be at least 4 characters')
-			test.todo('Second Password should be less than 20 characters')
-			test.todo('Second Password should have at least 1 uppercase and 1 number')
-			test.todo('Second Password should be equal to First Password')
-			test.todo('Second Password is required')
+
+			test('Second Password should be equal to First Password', async () => {
+				const {getByTestId, queryByTestId} = render(<Register />)
+
+				await wait(() => {
+					const input_1 = getByTestId('input_password')
+					const input_2 = getByTestId('input_password_2')
+					fireEvent.change(input_1, {
+						target: { value: 'P4ss'}
+					})
+					fireEvent.blur(input_1)
+					fireEvent.change(input_2, {
+						target: { value: 'P4ss2'} 
+					})
+					fireEvent.blur(input_2)
+				})
+				
+				expect(queryByTestId('input_password_2_error')).toBeInTheDocument()
+				expect(getByTestId('input_password_2_error')).toHaveTextContent('Tu contraseña debe de coincidir con la anterior')
+
+			})
+
+			test('Second Password is required', async () => {
+				const {getByTestId, queryByTestId} = render(<Register />)
+
+				await wait(() => {
+					const input_1 = getByTestId('input_password')
+					const input_2 = getByTestId('input_password_2')
+					fireEvent.change(input_1, {
+						target: { value: 'P4ss'}
+					})
+					fireEvent.blur(input_1)
+					fireEvent.change(input_2, {
+						target: { value: ''} 
+					})
+					fireEvent.blur(input_2)
+				})
+				
+				expect(queryByTestId('input_password_2_error')).toBeInTheDocument()
+				expect(getByTestId('input_password_2_error')).toHaveTextContent('Debes escribir una contraseña')
+
+			})
+
+			test('Second Password is correct', async () => {
+				const {getByTestId, queryByTestId} = render(<Register />)
+
+				await wait(() => {
+					const input_1 = getByTestId('input_password')
+					const input_2 = getByTestId('input_password_2')
+					fireEvent.change(input_1, {
+						target: { value: 'P4ss'}
+					})
+					fireEvent.blur(input_1)
+					fireEvent.change(input_2, {
+						target: { value: 'P4ss'}
+					})
+					fireEvent.blur(input_2)
+				})
+				
+				expect(queryByTestId('input_password_2_error')).not.toBeInTheDocument()
+
+			})
 		})
 
 		describe('Form errors after submit', () => {
-			test.todo('User already exists')
+			
+			test('User already exists', async () => {
+				const {getByTestId, queryByTestId} = render(<Register />)
+
+				await wait(() => {
+					const input_name = getByTestId('input_name')
+					fireEvent.change(input_name, {
+						target: { value: ''}
+					})
+					fireEvent.blur(input_name)
+				})
+				await wait(() => {
+					const input_last_name = getByTestId('input_last_name')
+					fireEvent.change(input_last_name, {
+						target: { value: ''}
+					})
+					fireEvent.blur(input_last_name)
+				})
+				await wait(() => {
+					const input_email = getByTestId('input_email')
+					fireEvent.change(input_email, {
+						target: { value: ''}
+					})
+					fireEvent.blur(input_email)
+				})
+				await wait(() => {
+					const input_password = getByTestId('input_password')
+					fireEvent.change(input_password, {
+						target: { value: ''}
+					})
+					fireEvent.blur(input_password)
+				})
+				await wait(() => {
+					const input_password_2 = getByTestId('input_password_2')
+					fireEvent.change(input_password_2, {
+						target: { value: ''}
+					})
+					fireEvent.blur(input_password_2)
+				})
+
+				// await wait(() => {
+				// 	const input_submit = getByTestId('input_submit')
+				// 	fireEvent.click()
+				// })
+				
+				// expect(queryByTestId('input_password_2_error')).not.toBeInTheDocument()
+
+			})
 		})
 
 	})
