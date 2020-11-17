@@ -93,10 +93,10 @@ function Register (props) {
 
     return (
      <section className="grid-cols">
-            <section className="banner grid-cols--item-short">
-			  <h2>Regístrate</h2>
+            <section className="banner grid-cols--item-short" data-testid="register_titles">
+                <h2>Regístrate</h2>
 
-              <p className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</p>
+                <p className="mdh-login-view-description">Agenda tus servicios rápido y fácil!</p>
             </section>
 
             <form onSubmit={formik.handleSubmit} autoComplete="off" className="form grid-cols--item-short" >
@@ -116,11 +116,12 @@ function Register (props) {
                         name="name" 
                         type="text"
                         max="20"
+                        data-testid="input_name"
                         required
                         {...formik.getFieldProps('name')}
                     />
                     { formik.touched.name && formik.errors.name ? 
-                        <span className="form_input__error"> 
+                        <span className="form_input__error" data-testid="input_name_error"> 
                           {formik.errors.name} 
                         </span> : null
                     }
@@ -134,10 +135,11 @@ function Register (props) {
                         id="last_name" 
                         name="last_name" 
                         type="text"
+                        data-testid="input_last_name"
                         {...formik.getFieldProps('last_name')}
                     />
                     { formik.touched.last_name && formik.errors.last_name ? 
-                    <span className="form_input__error"> {formik.errors.last_name} </span> : null}
+                    <span className="form_input__error" data-testid="input_last_name_error"> {formik.errors.last_name} </span> : null}
                 </section>
 
                 <section className="form_input">
@@ -147,11 +149,12 @@ function Register (props) {
                         id="email" 
                         name="email" 
                         type="email"
+                        data-testid="input_email"
                         required
                         {...formik.getFieldProps('email')}
                     />
                     { formik.touched.email && formik.errors.email ? 
-                    <span className="form_input__error"> {formik.errors.email} </span> : null}
+                    <span className="form_input__error" data-testid="input_email_error"> {formik.errors.email} </span> : null}
                 </section>
 
               <section className="form_input">
@@ -161,11 +164,12 @@ function Register (props) {
                         id="password" 
                         name="password" 
                         type="password"
+                        data-testid="input_password"
                         required
                         {...formik.getFieldProps('password')}
                     />
                     { formik.touched.password && formik.errors.password ? 
-                    <span className="form_input__error"> {formik.errors.password} </span> : null}
+                    <span className="form_input__error" data-testid="input_password_error"> {formik.errors.password} </span> : null}
               </section>
 
               <section className="form_input">
@@ -175,16 +179,18 @@ function Register (props) {
                         id="password_2" 
                         name="password_2" 
                         type="password"
+                        data-testid="input_password_2"
                         required
                         {...formik.getFieldProps('password_2')}
                     />
                     { formik.touched.password_2 && formik.errors.password_2 ? 
-                    <span className="form_input__error"> {formik.errors.password_2} </span> : null}
+                    <span className="form_input__error" data-testid="input_password_2_error"> {formik.errors.password_2} </span> : null}
               </section>
 
               <section className="form_input form_submit">
                   <button
                       type="submit"
+                        data-testid="input_submit"
                       className="btn_primary"
                     >
                     Registrarse
